@@ -3,7 +3,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] === "GET"){
 		
-		$nodes = Query("SELECT * FROM nodes", "", "");
+		$nodes = Connect()->query("SELECT * FROM nodes");
 
         if ($nodes->num_rows === 0){
             $output["error_msg"] = "no tasks for that checklist";
@@ -12,43 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] === "GET"){
                 $output["nodes"][] = $row;
             }
 		}
-		echo("test");
 		echo(json_encode($output));
 }
 
-function Connect(){
-    $db_servername = "localhost";
-    $db_username = "root";
-    $db_password = "";
-    $dbname = "";
 
-    // Create connection
-    $conn = new mysqli($db_servername, $db_username, $db_password, $dbname);
+function Poll(){
 
-    //check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    return $conn;
 }
 
-function Query($statement, $types, ...$variables){
-    $conn = Connect();
+function Register(){
 
-    //prepare, bind and execute the statement
-    $stmt = $conn->prepare($statement);
-    $stmt->bind_param($types, ...$variables);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    //close connection
-    $stmt->close();
-    $conn->close();
-
-    return $result;
 }
+
 
 
 ?>
