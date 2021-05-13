@@ -33,14 +33,14 @@ function date_sql_js(date){
 }
 setInterval(Poll, 5000);
 
-while (true){
-  let curr_date = new Date();
+//while (true){
+  //let curr_date = new Date();
   
-  if (play_at < curr_date && curr_date > new Date()
+  //if (play_at < curr_date && curr_date > new Date()
   
-  if date.get
+  //if date.get
 
-}
+//}
 
   
 
