@@ -3,6 +3,8 @@ var playing = [{name: "test3", pingTime: "1620834542398", playSince: "1620834542
 
 function updateTables() {
    // ran whenever computers are changed/added/whatever
+   document.getElementById("silent").innerHTML = ""
+   document.getElementById("playing").innerHTML = ""
    for (var i=0; i < silent.length; i++) {
       document.getElementById("silent").innerHTML += "<tr><td>" + silent[i].name + "</td><td><a href='javascript:beep(\"s" + i + "\")'>Beep</a></td><td><input type='checkbox' id='s" + i + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + i + "'></input></td></tr>"
    }
@@ -47,7 +49,19 @@ function updateSongs() {
 
 function updateData(newData) { // for when the server sends shit
    var tableUpdate = false
-   //if (newData[0].length != 
+   if (newData[0].length != silent.length || newData[1].length != playing.length) tableUpdate = true
+   else {
+      for (var i=0; i < silent.length; i++) {
+         if (silent[i].name != newData[0][i].name) tableUpdate = true
+      }
+      for (var i=0; i < playing.length; i++) {
+         if (playing[i].name != newData[1][i].name || playing[i].song != newData[1][i].song || playing[i].playSince != newData[1][i].playSince) tableUpdate = true
+      }
+   }
+   silent = newData[0]
+   playing = newData[1]
+   console.log(tableUpdate)
+   if (tableUpdate) updateTables()
 }
 
 function formatTime(time) {
