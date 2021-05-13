@@ -1,28 +1,35 @@
-var silent = [{name: "test", pingTime: "1620834542398"}, {name: "test2", pingTime: "1620834542398"}]
-var playing = [{name: "test3", pingTime: "1620834542398", playSince: "1620834542398", song: "/audio/axel.ogg"}]
+var silent = [{name: "test", pingTime: "1620834542398"}, {name: "test3", pingTime: "1620834542398"}]
+var playing = [{name: "test2", pingTime: "1620834542398", playSince: "1620834542398", song: "/audio/axel.ogg"}]
 
 function updateTables() {
    // ran whenever computers are changed/added/whatever
    document.getElementById("nodes").innerHTML = ""
-   for (var i=0; i < silent.length; i++) {
-      document.getElementById("nodes").innerHTML += "<tr><td>" + silent[i].name + "</td><td>No</td><td><a href='javascript:beep(\"s" + i + "\")'>Beep</a></td><td><input type='checkbox' id='s" + i + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + i + "'></input></td></tr>"
-   }
-   for (var i=0; i < playing.length; i++) {
-      document.getElementById("nodes").innerHTML += "<tr><td>" + playing[i].name + "</td><td>Yes</td><td><a href='javascript:beep(\"p" + i + "\")'>Beep</a></td><td><input type='checkbox' id='p" + i + "'></input></td><td><input type='text' value='" + playing[i].song + "' id='pa" + i + "'></input></td><td>" + formatTime(playing[i].playSince) + "</td></tr>"
+   var data = silent.concat(playing)
+   data.sort((a,b) => {
+      let fa = a.name.toLowerCase(),
+         fb = b.name.toLowerCase();
+      if (fa < fb) {
+         return -1;
+      }
+      if (fa > fb) {
+         return 1;
+      }
+      return 0;
+   })
+   for (var i=0; i < data.length; i++) {
+      if (data[i].playSince) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td><a href='javascript:beep(\"p" + data[i].name + "\")'>Beep</a></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='pa" + data[i].name + "'></input></td><td>" + formatTime(data[i].playSince) + "</td></tr>"
+      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td><a href='javascript:beep(\"s" + data[i].name + "\")'>Beep</a></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + data[i].name + "'></input></td></tr>"
    }
 }
 
-function beep(computerID) {
-   if (computerID.startsWith('s')) var computer = silent[computerID.substring(1)]
-   else var computer = playing[computerID.substring(1)]
-   console.log(computer)
+function beep(computerName) {
    // send data to server
 }
 
 function start_playing() {
    var computers = []
    for (var i=0; i < silent.length; i++) {
-      if (document.getElementById('s' + i).checked) computers.push([silent[i], document.getElementById('sa' + i).value])
+      if (document.getElementById('s' + silent[i].name).checked) computers.push([silent[i], document.getElementById('sa' + silent[i].name).value])
    }
    console.log(computers)
    // send data to server
@@ -31,7 +38,7 @@ function start_playing() {
 function stop_playing() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
-      if (document.getElementById('p' + i).checked) computers.push(playing[i])
+      if (document.getElementById('p' + playing[i].name).checked) computers.push(playing[i])
    }
    console.log(computers)
    // send data to server
@@ -40,7 +47,7 @@ function stop_playing() {
 function update_songs() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
-      if (document.getElementById('pa' + i).value != playing[i].song) computers.push([playing[i], document.getElementById('pa' + i).value])
+      if (document.getElementById('pa' + playing[i].name).value != playing[i].song) computers.push([playing[i], document.getElementById('pa' + playing[i].name).value])
    }
    console.log(computers)
    // send data to server
@@ -68,3 +75,15 @@ function formatTime(time) {
    return date.getHours() + ":" + ("0" + date.getMinutes()).substr(-2) + ":" + ("0" + date.getSeconds()).substr(-2) + ":" + ("0" + date.getMilliseconds()).substr(-3)
 }
 updateTables()
+function Poll() {
+   $.post(
+      "HandleControllerPoll.php",
+      {},
+      Poll_returned,
+      "json"
+      );
+}
+
+function Poll_returned(nodes) {
+   console.log(nodes)
+}
