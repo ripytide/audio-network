@@ -7,8 +7,8 @@ function Poll(){
     );
 }
 
-function Poll_returned(json){
-  console.log(json);
+function Poll_returned(node){
+  console.log(node);
 }
   
   
