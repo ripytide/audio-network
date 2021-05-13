@@ -1,6 +1,6 @@
 function Poll(){
   $.post(
-    "HandlePoll.php",
+    "HandleNodePoll.php",
     {},
     Poll_returned,
     "json"
