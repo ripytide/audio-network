@@ -9,7 +9,7 @@ function Poll(){
 
 function Poll_returned(json){
   let log = document.getElementById("log");
-  log.value += "Last polled at: " + json["node"]["last_polled"];
+  log.value += "\nLast polled at: " + json["node"]["last_polled"];
 }
   
   
