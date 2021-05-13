@@ -1,11 +1,17 @@
-var silent = [{name: "test", pingTime: "1620834542398", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542398", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
-var playing = [{name: "test2", pingTime: "1620834542398", playSince: "1620834542398", song: "/audio/axel.ogg", volume: 0.4}]
-var correct_time = 0 // difference between server and computer, this will actually be delayed but this doesn't really matter 
-var time_delay = 500
+var silent = [{name: "test", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
+var playing = [{name: "test2", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
+var time_delay = 2
 
-setInterval(function() {
-   document.getElementById("time").innerHTML = formatTime(Number(Date.now())+correct_time)
-},0)
+function Get_time(){//returns the current time in unix time
+	let time;
+	$.ajax({
+		url: "https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp?datetime=now",
+		success: function(json){time=json["UnixTimeStamp"]},
+		async: false
+	});
+
+	return time;
+}		
 
 function updateTables() {
    // ran whenever computers are changed/added/whatever
@@ -55,7 +61,7 @@ function start_playing() {
    for (var node of nodes) {
       var object = {volume: null, name: node.name}
       if (computers.indexOf(node.name) != -1) {
-         object.play_at = Number(Date.now())+time_delay+correct_time
+         object.play_at = Number(Get_time())+time_delay
          object.audio = document.getElementById('a' + node.name).value
       }
       else {
@@ -119,13 +125,13 @@ function updateData(newData) { // for when the server sends shit
 }
 
 function formatTime(time) {
-   var date = new Date(Number(time))
+   var date = new Date(Number(time)*1000)
    return date.getHours() + ":" + ("0" + date.getMinutes()).substr(-2) + ":" + ("0" + date.getSeconds()).substr(-2) + ":" + ("00" + date.getMilliseconds()).substr(-3)
 }
 updateTables()
 
 function log_update(str) {
-   document.getElementById("logs").innerHTML = formatTime(Number(Date.now())+correct_time) + " " + str + "<br></br>" + document.getElementById("logs").innerHTML
+   document.getElementById("logs").innerHTML = formatTime(Number(Get_time())) + " " + str + "<br></br>" + document.getElementById("logs").innerHTML
 }
 
 function Poll() {
@@ -139,4 +145,13 @@ function Poll() {
 
 function Poll_returned(nodes) {
    console.log(nodes)
+   for (var node of nodes) {
+      $.ajax({
+      url: "https://checky.uk/audio-network/HandleControllerPoll.php",
+      data: node,
+      success: log_update('successlol'),
+      type: "POST",
+      dataType: "json"
+      })
+   }
 }
