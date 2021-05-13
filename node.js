@@ -2,7 +2,7 @@ let audio_url;
 let play_at;
 let volume;
 let audio_playing;
-let audio = new Audio("");
+let audio = new Audio("https://bigsoundbank.com/UPLOAD/ogg/0029.ogg");
 window.addEventListener('load', Main_loop);
 
 function Poll(){
