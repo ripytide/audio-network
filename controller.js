@@ -1,5 +1,10 @@
 var silent = [{name: "test", pingTime: "1620834542398"}, {name: "test3", pingTime: "1620834542398"}]
 var playing = [{name: "test2", pingTime: "1620834542398", playSince: "1620834542398", song: "/audio/axel.ogg"}]
+var correct_time = 0 // difference between server and computer, this will actually be delayed but this doesn't really matter 
+
+setInterval(function() {
+   document.getElementById("time").innerHTML = formatTime(Number(Date.now())+correct_time)
+},0)
 
 function updateTables() {
    // ran whenever computers are changed/added/whatever
@@ -31,7 +36,8 @@ function start_playing() {
    for (var i=0; i < silent.length; i++) {
       if (document.getElementById('s' + silent[i].name).checked) computers.push([silent[i], document.getElementById('sa' + silent[i].name).value])
    }
-   console.log(computers)
+   if (!computers.length) return
+   log_update("Send songs to play to server: " + JSON.stringify(computers))
    // send data to server
 }
 
@@ -40,7 +46,8 @@ function stop_playing() {
    for (var i=0; i < playing.length; i++) {
       if (document.getElementById('p' + playing[i].name).checked) computers.push(playing[i])
    }
-   console.log(computers)
+   if (!computers.length) return
+   log_update("Send songs to stop to server: " + JSON.stringify(computers))
    // send data to server
 }
 
@@ -49,7 +56,8 @@ function update_songs() {
    for (var i=0; i < playing.length; i++) {
       if (document.getElementById('pa' + playing[i].name).value != playing[i].song) computers.push([playing[i], document.getElementById('pa' + playing[i].name).value])
    }
-   console.log(computers)
+   if (!computers.length) return
+   log_update("Send songs update to server: " + JSON.stringify(computers))
    // send data to server
 }
 
@@ -66,15 +74,20 @@ function updateData(newData) { // for when the server sends shit
    }
    silent = newData[0]
    playing = newData[1]
-   console.log(tableUpdate)
+   log_update("Tables were updated")
    if (tableUpdate) updateTables()
 }
 
 function formatTime(time) {
    var date = new Date(Number(time))
-   return date.getHours() + ":" + ("0" + date.getMinutes()).substr(-2) + ":" + ("0" + date.getSeconds()).substr(-2) + ":" + ("0" + date.getMilliseconds()).substr(-3)
+   return date.getHours() + ":" + ("0" + date.getMinutes()).substr(-2) + ":" + ("0" + date.getSeconds()).substr(-2) + ":" + ("00" + date.getMilliseconds()).substr(-3)
 }
 updateTables()
+
+function log_update(str) {
+   document.getElementById("logs").innerHTML = formatTime(Number(Date.now())+correct_time) + " " + str + "<br></br>" + document.getElementById("logs").innerHTML
+}
+
 function Poll() {
    $.post(
       "HandleControllerPoll.php",
