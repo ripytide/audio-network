@@ -1,46 +1,68 @@
-
 let audio_url;
 let play_at;
 let volume;
-let playing = false;
+let audio_playing;
+let audio;
 
 function Poll(){
-  $.post(
-    "HandleNodePoll.php",
-    {},
-    Poll_returned,
-    "json"
-    );
+	$.ajax({
+		url: "HandleNodePoll.php",
+		success: Poll_returned,
+		type: "POST",
+		dataType: "json",
+		async: false
+	});
 }
 
 function Poll_returned(json){
-  let log = document.getElementById("log");
-  log.value += "\nLast polled at: " + json["node"]["last_polled"];
-  audio_url = json["node"]["audio_url"];
-  bits = json["node"]["play_at"].split("-");
-  
-  play_at = new Date(bits[0], bits[1] - 1, bits[2].substr(0,2))
-  volume = json["node"]["volume"];
+	//update log
+	let log = document.getElementById("log");
+	log.value += "\nLast polled at: " + json["last_polled"];
+
+	audio_url = json["audio_url"];
+	play_at = json["play_at"];
+	volume = json["volume"];
 }
 
-function date_sql_js(date){
-  let year = date.split("-")[0]
-  let month = date.split("-")[1] - 1
-  let day = date.split("-")[0].substr(0,2)
-  let hour = date.split(":")[0].substr(-3, -1)
-  let minute = date.split(":")[1]
-  let second = date.split(":")[2]
+function Get_time(){//returns the current time in unix time
+	let time;
+	$.ajax({
+		url: "https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp?datetime=now",
+		success: function(json){time=json["UnixTimeStamp"]},
+		async: false
+	});
+
+	return time;
+}	
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
-setInterval(Poll, 5000);
 
-//while (true){
-  //let curr_date = new Date();
-  
-  //if (play_at < curr_date && curr_date > new Date()
-  
-  //if date.get
+function Play(){
+	if (audio_url == playing_audio){
+		audio.play();
+	} else {
+		audio = new Audio(audio_url);
+		audio.play();
+	}
+}
 
-//}
+function Pause(){
+	audio.pause();
+}
 
-  
+while (true){
+	Poll();
+	if (!playing){
+		if (Get_time() > play_at && play_at > 0){
+			Play();
+		}
+	} else {
+		if (play_at < 0) {
+			Pause();
+		}
+	}
+	sleep(5000);
+}
 

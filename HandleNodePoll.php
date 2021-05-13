@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
   if ($node->num_rows === 0){
         $output["error_msg"] = "no tasks for that checklist";
     } else{
-        $output["node"] = $node->fetch_assoc();
+        $output = $node->fetch_assoc();
     }
     
   //send back info as json
