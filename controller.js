@@ -3,13 +3,12 @@ var playing = [{name: "test3", pingTime: "1620834542398", playSince: "1620834542
 
 function updateTables() {
    // ran whenever computers are changed/added/whatever
-   document.getElementById("silent").innerHTML = ""
-   document.getElementById("playing").innerHTML = ""
+   document.getElementById("nodes").innerHTML = ""
    for (var i=0; i < silent.length; i++) {
-      document.getElementById("silent").innerHTML += "<tr><td>" + silent[i].name + "</td><td><a href='javascript:beep(\"s" + i + "\")'>Beep</a></td><td><input type='checkbox' id='s" + i + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + i + "'></input></td></tr>"
+      document.getElementById("nodes").innerHTML += "<tr><td>" + silent[i].name + "</td><td>No</td><td><a href='javascript:beep(\"s" + i + "\")'>Beep</a></td><td><input type='checkbox' id='s" + i + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + i + "'></input></td></tr>"
    }
    for (var i=0; i < playing.length; i++) {
-      document.getElementById("playing").innerHTML += "<tr><td>" + playing[i].name + "</td><td>" + formatTime(playing[i].playSince) + "</td><td><a href='javascript:beep(\"p" + i + "\")'>Beep</a></td><td><input type='checkbox' id='p" + i + "'></input></td><td><input type='text' value='" + playing[i].song + "' id='pa" + i + "'></input></td></tr>"
+      document.getElementById("nodes").innerHTML += "<tr><td>" + playing[i].name + "</td><td>Yes</td><td><a href='javascript:beep(\"p" + i + "\")'>Beep</a></td><td><input type='checkbox' id='p" + i + "'></input></td><td><input type='text' value='" + playing[i].song + "' id='pa" + i + "'></input></td><td>" + formatTime(playing[i].playSince) + "</td></tr>"
    }
 }
 
@@ -20,7 +19,7 @@ function beep(computerID) {
    // send data to server
 }
 
-function startPlaying() {
+function start_playing() {
    var computers = []
    for (var i=0; i < silent.length; i++) {
       if (document.getElementById('s' + i).checked) computers.push([silent[i], document.getElementById('sa' + i).value])
@@ -29,7 +28,7 @@ function startPlaying() {
    // send data to server
 }
 
-function stopPlaying() {
+function stop_playing() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
       if (document.getElementById('p' + i).checked) computers.push(playing[i])
@@ -38,7 +37,7 @@ function stopPlaying() {
    // send data to server
 }
 
-function updateSongs() {
+function update_songs() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
       if (document.getElementById('pa' + i).value != playing[i].song) computers.push([playing[i], document.getElementById('pa' + i).value])
