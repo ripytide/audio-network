@@ -2,7 +2,7 @@ let audio_url;
 let play_at;
 let volume;
 let audio_playing;
-let audio;
+let audio = new Audio("");
 window.addEventListener('load', Main_loop);
 
 function Poll(){
@@ -46,6 +46,7 @@ function Play(){
 	} else {
 		audio = new Audio(audio_url);
 		audio.play();
+		playing_audio = audio_url;
 	}
 }
 
