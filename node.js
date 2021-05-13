@@ -3,6 +3,7 @@ let play_at;
 let volume;
 let audio_playing;
 let audio;
+window.addEventListener('load', Main_loop);
 
 function Poll(){
 	$.ajax({
@@ -52,14 +53,16 @@ function Pause(){
 	audio.pause();
 }
 
-while (true){
-	Poll();
-	audio.volume = volume
-	if (play_at < 0) {
-		Pause();
-	} else if (Get_time() > play_at){
-		Play();
+function Main_loop(){
+	while (true){
+		Poll();
+		audio.volume = volume
+		if (play_at < 0) {
+			Pause();
+		} else if (Get_time() > play_at){
+			Play();
+		}
+		sleep(5000);
 	}
-	sleep(5000);
 }
 
