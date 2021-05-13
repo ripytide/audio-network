@@ -23,6 +23,8 @@ session_commit();
 		<script src="node.js"></script>
 	
 		<h1><?php echo($name); ?></h1>
+		<h1>Log</h1>
+		<textarea id="log"></textarea>
 		<form action="HandleRegister.php" method="POST">
 			<label for="name">Name:</label>
 			<input name="name" type="text"></input>
