@@ -2,7 +2,12 @@ let audio_url;
 let play_at;
 let volume;
 let audio_playing = "";
-let audio = new Audio("https://bigsoundbank.com/UPLOAD/ogg/0029.ogg");
+let audio;
+
+let interval = 5000; //time between time checks
+let poll_interval = 5000; //time between polls
+
+
 window.addEventListener('load', Main_loop);
 
 function Poll(){
@@ -54,16 +59,17 @@ function Pause(){
 	audio.pause();
 }
 
+setInterval(Poll, poll_interval);
+
 function Main_loop(){
 	while (true){
-		Poll();
 		audio.volume = volume
-		if (play_at < 0) {
+		if (play_at < 0) { //play_at will be negative as a signal to pause
 			Pause();
 		} else if (Get_time() > play_at){
 			Play();
 		}
-		sleep(5000);
+		sleep(interval);
 	}
 }
 

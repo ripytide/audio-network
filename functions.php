@@ -38,4 +38,5 @@ function Query($statement, $types, ...$variables){
 
     return $result;
 }
+
 ?>
