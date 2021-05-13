@@ -22,13 +22,9 @@ function updateTables() {
       return 0;
    })
    for (var i=0; i < data.length; i++) {
-      if (data[i].playSince) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td><a href='javascript:beep(\"p" + data[i].name + "\")'>Beep</a></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='pa" + data[i].name + "'></input></td><td>" + formatTime(data[i].playSince) + "</td></tr>"
-      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td><a href='javascript:beep(\"s" + data[i].name + "\")'>Beep</a></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + data[i].name + "'></input></td></tr>"
+      if (data[i].playSince) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='pa" + data[i].name + "'></input></td><td>" + formatTime(data[i].playSince) + "</td></tr>"
+      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + data[i].name + "'></input></td></tr>"
    }
-}
-
-function beep(computerName) {
-   // send data to server
 }
 
 function start_playing() {
