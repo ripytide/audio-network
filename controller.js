@@ -150,7 +150,7 @@ function Poll_returned(nodes) {
 function send_data(nodes) {
    for (var node of nodes) {
       $.ajax({
-      url: "https://checky.uk/audio-network/HandleControllerPoll.php",
+      url: "https://checky.uk/audio-network/HandleControllerPost.php",
       data: node,
       success: log_update('successlol'),
       type: "POST",
