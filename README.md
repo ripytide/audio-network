@@ -3,9 +3,3 @@ haha audio on many pc at once lol funny
 
 ## Can u commit?
 ripytide can
-
-Josh fucking stinks
-brmbrm you're getting hacked bro
-
-
-
