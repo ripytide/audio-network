@@ -46,7 +46,7 @@ function volume_update(computer) {
       else object.volume = null
       send.push(object)
    }
-   Poll_returned(send)
+   send_data(send)
 }
 
 function start_playing() {
@@ -70,7 +70,7 @@ function start_playing() {
       }
       send.push(object)
    }
-   Poll_returned(send)
+   send_data(send)
 }
 
 function stop_playing() {
@@ -94,7 +94,7 @@ function stop_playing() {
       }
       send.push(object)
    }
-   Poll_returned(send)
+   send_data(send)
 }
 
 function update_songs() {
@@ -145,6 +145,9 @@ function Poll() {
 
 function Poll_returned(nodes) {
    console.log(nodes)
+}
+
+function send_data(nodes) {
    for (var node of nodes) {
       $.ajax({
       url: "https://checky.uk/audio-network/HandleControllerPoll.php",
