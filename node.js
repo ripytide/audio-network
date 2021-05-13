@@ -7,8 +7,9 @@ function Poll(){
     );
 }
 
-function Poll_returned(node){
-  console.log(node);
+function Poll_returned(json){
+  log = document.getElementById("log");
+  log.text += "Last polled at: " + json["node"][last_polled];
 }
   
   
