@@ -7,8 +7,18 @@ let audio;
 let interval = 5000; //time between time checks
 let poll_interval = 5000; //time between polls
 
+setInterval(Poll, poll_interval);
 
-window.addEventListener('load', Main_loop);
+setInterval(Check_play(), interval);
+
+function Check_play(){
+	audio.volume = volume
+	if (play_at < 0) { //play_at will be negative as a signal to pause
+		audio.pause();
+	} else if (Get_time() > play_at){
+		Play();
+	}
+}
 
 function Poll(){
 	$.ajax({
@@ -16,7 +26,6 @@ function Poll(){
 		success: Poll_returned,
 		type: "POST",
 		dataType: "json",
-		async: false
 	});
 }
 
@@ -30,21 +39,6 @@ function Poll_returned(json){
 	volume = json["volume"];
 }
 
-function Get_time(){//returns the current time in unix time
-	let time;
-	$.ajax({
-		url: "https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp?datetime=now",
-		success: function(json){time=json["UnixTimeStamp"]},
-		async: false
-	});
-
-	return time;
-}	
-
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function Play(){
 	if (audio_url == playing_audio){
 		audio.play();
@@ -54,22 +48,3 @@ function Play(){
 		playing_audio = audio_url;
 	}
 }
-
-function Pause(){
-	audio.pause();
-}
-
-setInterval(Poll, poll_interval);
-
-function Main_loop(){
-	while (true){
-		audio.volume = volume
-		if (play_at < 0) { //play_at will be negative as a signal to pause
-			Pause();
-		} else if (Get_time() > play_at){
-			Play();
-		}
-		sleep(interval);
-	}
-}
-
