@@ -1,5 +1,5 @@
-var silent = [{name: "test", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
-var playing = [{name: "test2", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
+var silent = [{name: "1620943094", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
+var playing = [{name: "as", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
 var time_delay = 2
 
 function Get_time(){//returns the current time in unix time
