@@ -54,14 +54,11 @@ function Pause(){
 
 while (true){
 	Poll();
-	if (!playing){
-		if (Get_time() > play_at && play_at > 0){
-			Play();
-		}
-	} else {
-		if (play_at < 0) {
-			Pause();
-		}
+	audio.volume = volume
+	if (play_at < 0) {
+		Pause();
+	} else if (Get_time() > play_at){
+		Play();
 	}
 	sleep(5000);
 }
