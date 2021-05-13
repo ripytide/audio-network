@@ -1,5 +1,5 @@
-var silent = [{name: "test", pingTime: "1620834542398"}, {name: "test3", pingTime: "1620834542398"}]
-var playing = [{name: "test2", pingTime: "1620834542398", playSince: "1620834542398", song: "/audio/axel.ogg"}]
+var silent = [{name: "test", pingTime: "1620834542398", volume: 1}, {name: "test3", pingTime: "1620834542398", volume: 0.8}]
+var playing = [{name: "test2", pingTime: "1620834542398", playSince: "1620834542398", song: "/audio/axel.ogg", volume: 0.4}]
 var correct_time = 0 // difference between server and computer, this will actually be delayed but this doesn't really matter 
 
 setInterval(function() {
@@ -22,9 +22,15 @@ function updateTables() {
       return 0;
    })
    for (var i=0; i < data.length; i++) {
-      if (data[i].playSince) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='pa" + data[i].name + "'></input></td><td>" + formatTime(data[i].playSince) + "</td></tr>"
-      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='/audio/axel.ogg' id='sa" + data[i].name + "'></input></td></tr>"
+      if (data[i].playSince) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='pa" + data[i].name + "'></input></td><td><td><input id='v" + data[i].name + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100' value='100'></td><td>" + formatTime(data[i].playSince) + "</td></tr>"
+      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><type='text' value='/audio/axel.ogg' id='sa" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100' value='100'></td></tr>"
    }
+}
+
+function volume_update(computer) {
+   var volume = document.getElementById(computer).value/100
+   computer = computer.slice(1)
+   log_update("Set volume of " + computer + " to  " + volume)
 }
 
 function start_playing() {
