@@ -1,9 +1,9 @@
 <?php
 function Connect(){
     $db_servername = "localhost";
-    $db_username = "root";
-    $db_password = "h";
-    $dbname = "audio-network";
+    $db_username = "u108222632_main";
+    $db_password = "1234567890123456789012345678901234567890aA";
+    $dbname = "u108222632_main";
 
     // Create connection
     $conn = new mysqli($db_servername, $db_username, $db_password, $dbname);
