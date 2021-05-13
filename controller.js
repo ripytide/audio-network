@@ -41,7 +41,7 @@ function volume_update(computer) {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      var object = {play_at: null, audio: null, name: node.name}
+      var object = {play_at: null, audio_url: null, name: node.name}
       if (node.name == computer) object.volume = volume
       else object.volume = null
       send.push(object)
@@ -62,11 +62,11 @@ function start_playing() {
       var object = {volume: null, name: node.name}
       if (computers.indexOf(node.name) != -1) {
          object.play_at = Number(Get_time())+time_delay
-         object.audio = document.getElementById('a' + node.name).value
+         object.audio_url = document.getElementById('a' + node.name).value
       }
       else {
          object.play_at = null
-         object.audio = null
+         object.audio_url = null
       }
       send.push(object)
    }
@@ -86,11 +86,11 @@ function stop_playing() {
       var object = {volume: null, name: node.name}
       if (computers.indexOf(node.name) != -1) {
          object.play_at = 1
-         object.audio = document.getElementById('a' + node.name).value
+         object.audio_url = document.getElementById('a' + node.name).value
       }
       else {
          object.play_at = null
-         object.audio = null
+         object.audio_url = null
       }
       send.push(object)
    }
