@@ -1,4 +1,4 @@
-setInterval(Poll, 5000);
+
 let audio_url;
 let play_at;
 let volume;
@@ -31,7 +31,7 @@ function date_sql_js(date){
   let minute = date.split(":")[1]
   let second = date.split(":")[2]
 }
-
+setInterval(Poll, 5000);
 
 while (true){
   let curr_date = new Date();
