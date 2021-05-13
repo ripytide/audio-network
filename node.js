@@ -7,7 +7,7 @@ function Poll(){
     );
 }
 
-function Poll_returned(){
+function Poll_returned(json){
   console.log(json);
 }
   
