@@ -34,7 +34,7 @@ function get_time_diff(url){ //get the time difference in ms between current tim
 	$.ajax(
 		url,
 		dataType: "text",
-		async: false
+		async: false,
 		success: (time) => {
 			requested_time = time
 		});
