@@ -144,6 +144,7 @@ function Poll() {
 }
 
 function Poll_returned(nodes) {
+   console.log(performance.now())
    console.log(nodes)
 }
 
