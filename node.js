@@ -25,8 +25,7 @@ function Check_play(){
 	if (play_at < 0) { //play_at will be negative as a signal to pause
 		audio.pause();
 		playing = false;
-	}
-	
+		
 	} else if (Get_time() > play_at) { //time to play
 		audio.play();
 		playing = true;
