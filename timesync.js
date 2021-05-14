@@ -10,7 +10,7 @@ let times = [];
 
 let ping_count = document.getElementById("ping_count");
 for (let i=0; i<20; i++){
-	times.push(get_time_diff("GetTime.php");
+	times.push(get_time_diff("GetTime.php"));
 	ping_count.innerHTML = i;
 	
 }
