@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 	session_commit();
 
   //update the last_polled column for the node
-  Query("UPDATE nodes SET last_polled=?,playing=? WHERE name=?", "sbs", time(), $_POST["playing"] $name);
+  Query("UPDATE nodes SET last_polled=?,playing=?,audio_changed=false WHERE name=?", "sbs", time(), $_POST["playing"], $name);
   
 	//get relevant row from the database for the correct node
 	$node = Query("SELECT * FROM nodes WHERE name=?", "s", $name);
