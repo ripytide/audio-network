@@ -1,3 +1,4 @@
+console.log("hi");
 //api's for ms since epoch
 //https://currentmillis.com/time/minutes-since-unix-epoch.php
 //checky.uk version:
