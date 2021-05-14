@@ -38,6 +38,7 @@ function Poll(){
 		url: "HandleNodePoll.php",
 		success: Poll_returned,
 		type: "POST",
+		data: {playing},
 		dataType: "json",
 	});
 }
