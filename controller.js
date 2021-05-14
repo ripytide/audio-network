@@ -135,12 +135,13 @@ function log_update(str) {
 }
 
 function Poll() {
-   $.post(
-      "HandleControllerPoll.php",
-      {},
-      Poll_returned,
-      "json"
-      );
+   $.ajax({
+      url: "HandleControllerPoll.php",
+      data: {},
+	   success: Poll_returned,
+	type: "POST",
+      dataType: "json"
+	  });
 }
 
 function Poll_returned(nodes) {
@@ -153,7 +154,7 @@ function send_data(nodes) {
       $.ajax({
       url: "HandleControllerPost.php",
       data: node,
-      success: log_update('successlol'),
+      success: function(){log_update('successlol')},
       type: "POST",
       dataType: "json"
       })
