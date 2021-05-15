@@ -1,5 +1,5 @@
-var silent = [{name: "1620943094", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
-var playing = [{name: "as", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
+var silent = [] //[{name: "1620943094", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
+var playing = [] //[{name: "as", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
 var time_delay = 2
 
 function Get_time(){//returns the current time in unix time
@@ -115,7 +115,7 @@ function updateData(newData) { // for when the server sends shit
          if (silent[i].name != newData[0][i].name) tableUpdate = true
       }
       for (var i=0; i < playing.length; i++) {
-         if (playing[i].name != newData[1][i].name || playing[i].song != newData[1][i].song || playing[i].playSince != newData[1][i].playSince) tableUpdate = true
+         if (playing[i].name != newData[1][i].name || playing[i].song != newData[1][i].song || playing[i].playing != newData[1][i].playing) tableUpdate = true
       }
    }
    silent = newData[0]
@@ -128,7 +128,6 @@ function formatTime(time) {
    var date = new Date(Number(time)*1000)
    return date.getHours() + ":" + ("0" + date.getMinutes()).substr(-2) + ":" + ("0" + date.getSeconds()).substr(-2) + ":" + ("00" + date.getMilliseconds()).substr(-3)
 }
-updateTables()
 
 function log_update(str) {
    document.getElementById("logs").innerHTML = formatTime(Number(Get_time())) + " " + str + "<br></br>" + document.getElementById("logs").innerHTML
@@ -144,9 +143,19 @@ function Poll() {
 	  });
 }
 
+Poll()
+
 function Poll_returned(nodes) {
    console.log(performance.now())
    console.log(nodes)
+   var silent_temp = []
+   var playing_temp = []
+   for (var node of nodes) {
+      var new_node = {playSince: Number(node.playAt), name: node.name, volume: node.volume, song: node.audio_url}
+      if (new_node.playSince<=0) silent_temp.push(new_node)
+      else playing_temp.push(new_node)
+   }
+   updateData(silent_temp, playing_temp)
 }
 
 function send_data(nodes) {
