@@ -54,5 +54,5 @@ function get_time_diff(url){ //get the time difference in ms between current tim
 		}
 	});
 
-	return time_after - time_before
+	return parseInt(time_after) - time_before
 }
