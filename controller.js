@@ -150,7 +150,7 @@ function Poll_returned(nodes) {
    console.log(nodes)
    var silent_temp = []
    var playing_temp = []
-   for (var node of nodes) {
+   for (var node of nodes.nodes) {
       var new_node = {playSince: Number(node.playAt), name: node.name, volume: node.volume, song: node.audio_url}
       if (new_node.playSince<=0) silent_temp.push(new_node)
       else playing_temp.push(new_node)
