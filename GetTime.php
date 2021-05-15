@@ -1,3 +1,3 @@
 <?php
-echo(time());
+echo(round(microtime(true) * 1000));
 ?>
