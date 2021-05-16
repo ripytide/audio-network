@@ -4,7 +4,7 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		
+
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -20,10 +20,83 @@
 		<title>timesync test</title>
 	</head>
 	<body>
-		<script src="timesync.js"></script>
+	<script src="timesync.js"></script>
 
-		<h1 id="ping_count"></h1>
-	
-		<div id="box_plot"></div>
+<style type="text/css">
+
+body {
+	background-color: gray;
+	text-align: center;
+}
+
+.table-container {
+	display: flex;
+	justify-content: center;
+}
+
+
+.tg  {border-collapse:collapse;border-color:#aabcfe;border-spacing:0;}
+.tg td{background-color:#e8edff;border-color:#aabcfe;border-style:solid;border-width:1px;color:#669;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#b9c9fe;border-color:#aabcfe;border-style:solid;border-width:1px;color:#039;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+
+
+
+	<h1>Time Sync Tester</h1>
+	<input id="local" type="radio" value="local" name="ping">
+	<label for="local">Local</label>
+	<input id="external" type="radio" value="local" name="ping">
+	<label for="external">External</label>
+	<br><br>
+
+	<div class="table-container">
+	<table id="table" class="tg">
+	<thead>
+	  <tr>
+		<th class="tg-0lax">Statistics</th>
+		<th class="tg-0lax">Time Difference</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+		<td class="tg-0lax">Mean</td>
+		<td id="mean-1" class="tg-0lax"></td>
+	  </tr>
+	  <tr>
+		<td class="tg-0lax">Median</td>
+		<td id="median-1" class="tg-0lax"></td>
+	  </tr>
+	  <tr>
+		<td class="tg-0lax">Standard Deviation</td>
+		<td id="stan-1" class="tg-0lax"></td>
+	  </tr>
+	  <tr>
+		<td class="tg-0lax">Range</td>
+		<td id="range-1" class="tg-0lax"></td>
+	  </tr>
+	  <tr>
+		<td class="tg-0lax">Inter-Quatile Range</td>
+		<td id="iq-range-1" class="tg-0lax"></td>
+	  </tr>
+	</tbody>
+	</table>
+	</div>
+
+
+	<h1 id="ping_count"></h1>
+
+	<div style="display: flex; flex-direction: row; justify-content: center;">
+	<div style="width: 80%; display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap;">
+	<div id="box_plot"></div>
+	<div id="line_plot"></div>
+	<div id="histogram_plot"></div>
+	</div>
+	</div>
+
+
 	</body>
 </html>
