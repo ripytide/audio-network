@@ -41,9 +41,8 @@ function volume_update(computer) {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      var object = {play_at: null, audio_url: null, name: node.name}
-      if (node.name == computer) object.volume = volume
-      else object.volume = null
+      if (node.name == computer) var object = {play_at: computer.playSince.toString(), audio_url: computer.song, name: node.name, audio_changed: false}
+      else continue
       send.push(object)
    }
    send_data(send)
@@ -59,15 +58,8 @@ function start_playing() {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      var object = {volume: null, name: node.name}
-      if (computers.indexOf(node.name) != -1) {
-         object.play_at = Number(Get_time())+time_delay
-         object.audio_url = document.getElementById('a' + node.name).value
-      }
-      else {
-         object.play_at = null
-         object.audio_url = null
-      }
+      if (computers.indexOf(node.name) == -1) continue
+      var object = {volume: node.volume, name: node.name, audio_changed: true, object.play_at: (Number(Get_time())+time_delay).toString(), object.audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
@@ -83,17 +75,11 @@ function stop_playing() {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      var object = {volume: null, name: node.name}
-      if (computers.indexOf(node.name) != -1) {
-         object.play_at = 1
-         object.audio_url = document.getElementById('a' + node.name).value
-      }
-      else {
-         object.play_at = null
-         object.audio_url = null
-      }
+      if (computers.indexOf(node.name) == -1) continue
+      var object = {volume: node.volume, name: node.name, audio_changed: true, object.play_at: '-1', object.audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
+   send_data(send)
    send_data(send)
 }
 
@@ -144,6 +130,10 @@ function Poll() {
 }
 
 Poll()
+
+setInterval(function() {
+   Poll()
+}, 200)
 
 function Poll_returned(nodes) {
    console.log(performance.now())
