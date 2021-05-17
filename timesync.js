@@ -3,11 +3,7 @@
 //checky.uk version:
 //GetTime.php
 
-
-let number_of_pings = 10
-let time_between_pings = 1
-
-$(window).on("load", async function(){
+async function Start_pinging(){
 	let time_diffs = [];
 	let time_means = [];
 	let time_medians = [];
@@ -62,6 +58,9 @@ $(window).on("load", async function(){
 		title: "Time Diffs Histogram",
 		bargap: 0.05,
 	}
+	
+	let number_of_pings = document.getElementById("number_of_pings").value;
+	let time_between_pings = document.getElementById("number_of_pings").value;
 
 	for (let i=0; i<number_of_pings; i++){
 		let new_diff = get_time_diff("GetTime.php");
@@ -88,9 +87,11 @@ $(window).on("load", async function(){
 		line_layout.datarevision = i;
 		histogram_layout.datarevision = i;
 
-		Plotly.react("box_plot", [box_data], box_layout);
-		Plotly.react("line_plot", [mean_data, median_data, mode_data], line_layout);
-		Plotly.react("histogram_plot", [histogram_data], histogram_layout);
+		if (document.getElementById("update_graphs").checked) {
+			Plotly.react("box_plot", [box_data], box_layout);
+			Plotly.react("line_plot", [mean_data, median_data, mode_data], line_layout);
+			Plotly.react("histogram_plot", [histogram_data], histogram_layout);
+		}
 
 		//updates the table
 		Update_stats(time_diffs);
@@ -99,6 +100,42 @@ $(window).on("load", async function(){
 	}
 
 });
+
+
+let changed = false;
+let switch_at;
+function Poll(){
+	$.ajax({
+		url: "HandleNodePoll.php",
+		success: (data) => {
+			changed = data.changed;
+			switch_at = data.switch_at;
+		}
+		type: "POST",
+		dataType: "json",
+	});
+} 
+
+function Check(){
+	if (changed) {
+		Off();
+	if (Get_time() > switch_at) { //time to switch
+		On();
+	}
+}
+
+function Off(){
+	document.getElementByTagName("BODY").style.background = "red";
+}
+function On(){
+	document.getElementByTagName("BODY").style.background = "green";
+}
+
+let current_checking;
+function Start_checking(){
+	clearTimeout(current_checking);
+	current_checking = setTimeout(Check, document.getElementById("time_interval"));
+}
 
 function Update_stats(times1){
 	document.getElementById("mean-1").innerHTML = ss.mean(times1).toFixed(2);
