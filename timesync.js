@@ -99,7 +99,7 @@ async function Start_pinging(){
 		await new Promise(r => setTimeout(r, time_between_pings));
 	}
 
-});
+}
 
 
 let changed = false;
