@@ -50,7 +50,9 @@ function volume_update(computer) {
 
 function start_playing() {
    var computers = []
+   console.log(silent)
    for (var i=0; i < silent.length; i++) {
+      console.log(document.getElementById('s' + silent[i].name))
       if (document.getElementById('s' + silent[i].name).checked) computers.push(silent[i].name)
    }
    console.log(computers)
