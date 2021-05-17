@@ -1,10 +1,6 @@
-//api's for ms since epoch
-//https://currentmillis.com/time/minutes-since-unix-epoch.php
-//checky.uk version:
-//GetTime.php
-
+let time_diffs = [];
 async function Start_pinging(){
-	let time_diffs = [];
+	time_diffs = [];
 	let time_means = [];
 	let time_medians = [];
 	let time_modes = [];
@@ -36,7 +32,7 @@ async function Start_pinging(){
 	let histogram_data = {
 		type: "histogram",
 		xbins: {
-			size: 1
+			size: 4
 		}
 	}
 	let box_layout = {
@@ -57,10 +53,16 @@ async function Start_pinging(){
 	let histogram_layout = {
 		title: "Time Diffs Histogram",
 		bargap: 0.05,
+		xaxis: {
+			title: "Time/ms"
+		},
+		yaxis: {
+			title: "Frequency"
+		}
 	}
 	
-	let number_of_pings = document.getElementById("number_of_pings").value;
-	let time_between_pings = document.getElementById("number_of_pings").value;
+	let number_of_pings = document.getElementById("ping_count_input").value;
+	let time_between_pings = document.getElementById("time_between_pings").value;
 
 	for (let i=0; i<number_of_pings; i++){
 		let new_diff = get_time_diff("GetTime.php");
@@ -103,43 +105,60 @@ async function Start_pinging(){
 
 
 let changed = false;
-let switch_at;
+let change_at;
+let poll_count = 0;
 function Poll(){
 	$.ajax({
-		url: "HandleNodePoll.php",
+		url: "HandleTimePoll.php",
 		success: (data) => {
 			changed = data.changed;
-			switch_at = data.switch_at;
+			change_at = data.change_at;
 		},
 		type: "POST",
 		dataType: "json",
 	});
+
+	poll_count++;
+	document.getElementById("poll_count").innerHTML = "Poll Count: " + poll_count;
+	console.log("Changed: " + changed);
+	console.log("change_at: " + change_at);
 } 
 
 function Check(){
 	if (changed) {
 		Off();
-	if (Get_time() > switch_at) { //time to switch
+	}
+
+	let time = Get_time();
+	if (time > change_at) { //time to switch
 		On();
 	}
+
+	document.getElementById("countdown").innerHTML = "Countdown: " + (change_at - time).toFixed(2);
 }
 
 function Off(){
-	document.getElementByTagName("BODY").style.background = "red";
+	document.getElementsByTagName("BODY")[0].style.background = "red";
 }
 function On(){
-	document.getElementByTagName("BODY").style.background = "green";
+	document.getElementsByTagName("BODY")[0].style.background = "green";
 }
 
 let current_checking;
-function Start_checking(){
-	clearTimeout(current_checking);
-	current_checking = setTimeout(Check, document.getElementById("time_interval"));
+let current_polling;
+function Start_Checking(){
+	clearInterval(current_checking);
+	clearInterval(current_polling);
+
+	let interval = document.getElementById("time_interval").value;
+	current_checking = setInterval(Check, interval);
+	current_polling = setInterval(Poll, 3000);
 }
 
 function Update_stats(times1){
 	document.getElementById("mean-1").innerHTML = ss.mean(times1).toFixed(2);
 	document.getElementById("median-1").innerHTML = ss.median(times1);
+	document.getElementById("mode-1").innerHTML = ss.mode(times1);
 	document.getElementById("stan-1").innerHTML = ss.standardDeviation(times1).toFixed(2);
 	document.getElementById("range-1").innerHTML = ss.max(times1) - ss.min(times1)
 	document.getElementById("iq-range-1").innerHTML = ss.interquartileRange(times1).toFixed(2);
@@ -157,8 +176,32 @@ function get_time_diff(url){ //get the time difference in ms between current tim
 		async: false,
 		success: (time) => {
 			requested_time = time
-		}
+		},
+		type: "POST"
 	});
 
 	return parseInt(requested_time) - time_before
+}
+
+
+let time_delay = 0;
+function Update_delay_mode(mode){
+	switch (mode) {
+		case "local":
+			time_delay = 0;
+			break;
+		case "mean":
+			time_delay = ss.mean(time_diffs);
+			break;
+		case "median":
+			time_delay = ss.median(time_diffs);
+			break;
+		case "mode":
+			time_delay = ss.mode(time_diffs);
+			break;
+	}
+}
+
+function Get_time(){
+	return (Date.now() - time_delay) / 1000;
 }

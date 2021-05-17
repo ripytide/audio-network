@@ -5,6 +5,7 @@ $result = Query("SELECT change_at, changed FROM timesync WHERE name=?", "s", "al
 
 $output = $result->fetch_assoc();
 
-echo(json_encode($output);
+Query("UPDATE timesync SET changed=false where name=?", "s", "all");
+echo(json_encode($output));
 
 ?>

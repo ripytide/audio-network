@@ -51,8 +51,8 @@ body {
 	<button onclick="Start_pinging()">Start Pinging</button>
 	<button onclick="Start_Checking()">Start Checking</button>
 
-	<label for="ping_count">Ping Count</label>	
-	<input type="number" id="ping_count">
+	<label for="ping_count_input">Ping Count</label>	
+	<input type="number" id="ping_count_input">
 
 	<label for="time_between_pings">Time between Pings</label>
 	<input type="number" id="time_between_pings">
@@ -65,16 +65,16 @@ body {
 
 	<h1>Calculate time difference using: </h1>														  
 	<label for="local">Local</label>
-	<input id="local" type="radio" value="local" name="theta">
+	<input id="local" type="radio" value="local" name="theta" onclick='Update_delay_mode("local")' checked>
 
 	<label for="mean">Mean</label>
-	<input id="mean" type="radio" value="mean" name="theta">
+	<input id="mean" type="radio" value="mean" name="theta" onclick='Update_delay_mode("mean")'>
 							       
 	<label for="median">Median</label>
-	<input id="median" type="radio" value="median" name="theta">
+	<input id="median" type="radio" value="median" name="theta" onclick='Update_delay_mode("median")'>
 							       
 	<label for="mode">Mode</label>
-	<input id="mode" type="radio" value="mode" name="theta">
+	<input id="mode" type="radio" value="mode" name="theta" onclick='Update_delay_mode("mode")'>
 							       
 	<br><br>
 
@@ -96,6 +96,10 @@ body {
 		<td id="median-1" class="tg-0lax"></td>
 	  </tr>
 	  <tr>
+		<td class="tg-0lax">Mode</td>
+		<td id="mode-1" class="tg-0lax"></td>
+	  </tr>
+	  <tr>
 		<td class="tg-0lax">Standard Deviation</td>
 		<td id="stan-1" class="tg-0lax"></td>
 	  </tr>
@@ -113,6 +117,8 @@ body {
 
 
 	<h1 id="ping_count"></h1>
+	<h1 id="poll_count"></h1>
+	<h1 id="countdown"></h1>
 
 	<div style="display: flex; flex-direction: row; justify-content: center;">
 	<div style="width: 80%; display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap;">
