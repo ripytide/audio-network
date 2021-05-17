@@ -184,24 +184,26 @@ function get_time_diff(url){ //get the time difference in ms between current tim
 }
 
 
-let time_delay = 0;
+let time_offset = 0;
 function Update_delay_mode(mode){
 	switch (mode) {
 		case "local":
-			time_delay = 0;
+			time_offset = 0;
 			break;
 		case "mean":
-			time_delay = ss.mean(time_diffs);
+			time_offset = ss.mean(time_diffs);
 			break;
 		case "median":
-			time_delay = ss.median(time_diffs);
+			time_offset = ss.median(time_diffs);
 			break;
 		case "mode":
-			time_delay = ss.mode(time_diffs);
+			time_offset = ss.mode(time_diffs);
 			break;
 	}
+
+	document.getElementById("time_offset").innerHTML = "Time Offset: " + time_offset;
 }
 
 function Get_time(){
-	return (Date.now() - time_delay) / 1000;
+	return (Date.now() - time_offset) / 1000;
 }
