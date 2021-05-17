@@ -53,6 +53,7 @@ function start_playing() {
    for (var i=0; i < silent.length; i++) {
       if (document.getElementById('s' + silent[i].name).checked) computers.push(silent[i].name)
    }
+   console.log(computers)
    if (!computers.length) return
    log_update("Send songs to play to server: " + JSON.stringify(computers))
    var nodes = silent.concat(playing)
@@ -62,6 +63,7 @@ function start_playing() {
       var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+time_delay).toString(), audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
+   console.log(send)
    send_data(send)
 }
 
@@ -79,7 +81,6 @@ function stop_playing() {
       var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: '-1', audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
-   send_data(send)
    send_data(send)
 }
 
