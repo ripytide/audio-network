@@ -110,7 +110,7 @@ function Poll(){
 		success: (data) => {
 			changed = data.changed;
 			switch_at = data.switch_at;
-		}
+		},
 		type: "POST",
 		dataType: "json",
 	});
