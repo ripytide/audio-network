@@ -47,10 +47,28 @@ body {
 
 
 	<h1>Time Sync Tester</h1>
-	<input id="local" type="radio" value="local" name="ping">
+	
+		<label for="ping_count">Ping Count</label>
+		
+	<input type="number" id="ping_count>
+	<label for="time_between_pings">Time between Pings</label>
+	<input type="number" id="time_between_pings">
+	<label for="update_graphs">Update Graphs</label>
+	<input type="checkbox" id="update_graphs">
+
+	<h1>Calculate time difference using: </h1>														  
 	<label for="local">Local</label>
-	<input id="external" type="radio" value="local" name="ping">
-	<label for="external">External</label>
+	<input id="local" type="radio" value="local" name="theta">
+
+	<label for="mean">Mean</label>
+	<input id="mean" type="radio" value="mean" name="theta">
+							       
+	<label for="median">Median</label>
+	<input id="median" type="radio" value="median" name="theta">
+							       
+	<label for="mode">Mode</label>
+	<input id="mode" type="radio" value="mode" name="theta">
+							       
 	<br><br>
 
 	<div class="table-container">
