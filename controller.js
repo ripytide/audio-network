@@ -76,7 +76,7 @@ function stop_playing() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: true, object.play_at: '-1', audio_url: document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: '-1', audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
