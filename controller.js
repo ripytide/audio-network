@@ -108,6 +108,7 @@ function updateData(newData) { // for when the server sends shit
       }
    }
    silent = newData[0]
+   console.log(silent)
    playing = newData[1]
    log_update("Tables were updated")
    if (tableUpdate) updateTables()
