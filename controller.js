@@ -89,7 +89,7 @@ function stop_playing() {
 function update_songs() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
-      if (document.getElementById('pa' + playing[i].name).value != playing[i].song) computers.push([playing[i], document.getElementById('pa' + playing[i].name).value])
+      if (document.getElementById('p' + playing[i].name).value != playing[i].song) computers.push([playing[i], document.getElementById('p' + playing[i].name).value])
    }
    if (!computers.length) return
    log_update("Send songs update to server: " + JSON.stringify(computers))
