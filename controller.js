@@ -1,6 +1,6 @@
 var silent = [] //[{name: "1620943094", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
 var playing = [] //[{name: "as", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
-var time_delay = 2
+//var time_delay = 2
 
 function Get_time(){//returns the current time in unix time
 	let time;
@@ -62,7 +62,7 @@ function start_playing() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+time_delay).toString(), audio_url: document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    console.log(send)
@@ -97,7 +97,7 @@ function update_songs() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+time_delay).toString(), audio_url: document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
