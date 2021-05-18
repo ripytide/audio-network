@@ -1,7 +1,7 @@
 let audio_url = "random starting url"
 let play_at;
 let volume;
-let audio;
+let audio = new Audio("");
 let playing = false;
 let audio_changed = false;
 
@@ -25,11 +25,17 @@ function Check_play(){
 	if (play_at < 0) { //play_at will be negative as a signal to pause
 		audio.pause();
 		playing = false;
+		document.getElementById("playing").innerHTML = "Not Playing...";
 		
 	} else if (Get_time() > play_at) { //time to play
 		audio.play();
 		playing = true;
+		document.getElementById("playing").innerHTML = "Playing: " + audio_url;
 	}
+}
+
+function Get_time(){
+	return Date.now();
 }
 
 function Poll(){
@@ -43,10 +49,6 @@ function Poll(){
 }
 
 function Poll_returned(json){
-	//update log
-	let log = document.getElementById("log");
-	log.value += "\nLast polled at: " + json["last_polled"];
-	
 	//update variables from poll
 	audio_url = json["audio_url"];
 	play_at = json["play_at"];
