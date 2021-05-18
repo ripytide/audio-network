@@ -23,9 +23,15 @@ session_commit();
 		<script src="node.js"></script>
 	
 		<h1><?php echo($name); ?></h1>
+
 		<button id="start_button" onclick="Start()">Start</button>
 		<h1 id="status">Not started...</h1>
+
 		<h1 id="playing"></h1>
+		<h1 id="audio_url"></h1>
+		<h1 id="play_at"></h1>
+		<h1 id="volume"></h1>
+
 		<form action="HandleRegister.php" method="POST">
 			<label for="name">Name:</label>
 			<input name="name" type="text"></input>

@@ -38,7 +38,7 @@ function Check_play(){
 	} else if (Get_time() > play_at) { //time to play
 		audio.play();
 		playing = true;
-		document.getElementById("playing").innerHTML = "Playing: " + audio_url;
+		document.getElementById("playing").innerHTML = "Playing";
 	}
 }
 
@@ -59,7 +59,13 @@ function Poll(){
 function Poll_returned(json){
 	//update variables from poll
 	audio_url = json["audio_url"];
+	$("#audio_url").innerHTML = "Audio url: " + audio_url;
+
 	play_at = json["play_at"];
+	$("#play_at").innerHTML = "Play At: " + play_at;
+
 	volume = json["volume"];
+	$("#volume").innerHTML = "Volume: " + volume;
+
 	audio_changed = json["audio_changed"];
 }
