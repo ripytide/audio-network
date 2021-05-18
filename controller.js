@@ -145,7 +145,7 @@ function Poll_returned(nodes) {
    if (nodes.error_msg) {
       if (nodes.error_msg == "no nodes") {
          console.log("no nodes")
-	 updateData([[],[])
+	 updateData([[],[]])
          return
       }
       else {
