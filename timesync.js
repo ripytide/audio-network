@@ -148,6 +148,7 @@ function On(){
 let current_checking;
 let current_polling;
 function Start_Checking(){
+	Register();
 	clearInterval(current_checking);
 	clearInterval(current_polling);
 
