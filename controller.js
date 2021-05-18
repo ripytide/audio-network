@@ -150,6 +150,7 @@ function Poll_returned(nodes) {
       if (new_node.playSince<=0) silent_temp.push(new_node)
       else playing_temp.push(new_node)
    }
+   console.log(silent_temp)
    updateData([silent_temp, playing_temp])
 }
 
