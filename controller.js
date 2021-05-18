@@ -142,6 +142,17 @@ setInterval(function() {
 function Poll_returned(nodes) {
    console.log(performance.now())
    console.log(nodes)
+   if (nodes.error_msg) {
+      if (nodes.error_msg == "no nodes") {
+         console.log("no nodes")
+	 updateData([[],[])
+         return
+      }
+      else {
+         console.log(nodes.error_msg)
+         return
+      }
+   }
    var silent_temp = []
    var playing_temp = []
    for (var node of nodes.nodes) {
