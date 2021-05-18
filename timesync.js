@@ -201,6 +201,9 @@ function Update_delay_mode(mode){
 		case "mode":
 			time_offset = ss.mode(time_diffs);
 			break;
+		case "custom":
+			time_offset = document.getElementById("custom_offset").value;
+			break;
 	}
 
 	document.getElementById("time_offset").innerHTML = "Time Offset: " + time_offset;
