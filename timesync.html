@@ -75,6 +75,10 @@ body {
 							       
 	<label for="mode">Mode</label>
 	<input id="mode" type="radio" value="mode" name="theta" onclick='Update_delay_mode("mode")'>
+
+	<label for="cus">Mode</label>
+	<input id="cus" type="radio" value="cus" name="theta" onclick='Update_delay_mode("cus")'>
+
 							       
 	<br><br>
 
@@ -120,6 +124,9 @@ body {
 	<h1 id="time_offset"></h1>
 	<h1 id="poll_count"></h1>
 	<h1 id="countdown"></h1>
+		
+	<label for="custom_offset">Custom Offset</label>	
+	<input type="number" id="custom_offset">
 
 	<div style="display: flex; flex-direction: row; justify-content: center;">
 	<div style="width: 80%; display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap;">
