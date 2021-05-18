@@ -115,6 +115,7 @@ function Poll(){
 			change_at = data.change_at;
 		},
 		type: "POST",
+		data: {name},
 		dataType: "json",
 	});
 
@@ -207,3 +208,15 @@ function Update_delay_mode(mode){
 function Get_time(){
 	return (Date.now() - time_offset) / 1000;
 }
+
+let name;
+function Register(){
+	name = prompt("Please enter name: ");
+	
+	$.ajax({
+		url: "HandleTimeRegister.php",
+		type: "POST",
+		data: {name},
+		dataType: "json",
+	});
+} 
