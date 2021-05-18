@@ -1,4 +1,4 @@
-let audio_url = "random starting url"
+let audio_url = ""
 let play_at = 0;
 let volume = 0;
 let audio = new Audio("");
