@@ -10,7 +10,15 @@ let poll_interval = 5000; //time between polls
 
 setInterval(Poll, poll_interval);
 
-setInterval(Check_play(), interval);
+function Start(){
+	let status = document.getElementById("status");
+	let start_button = document.getElementById("start_button");
+
+	status.innerHTML = "Started"
+	start_button.remove();
+
+	setInterval(Check_play, interval);
+}
 
 function Check_play(){
 	audio.volume = volume;
