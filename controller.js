@@ -89,11 +89,18 @@ function stop_playing() {
 function update_songs() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
-      if (document.getElementById('p' + playing[i].name).value != playing[i].song) computers.push([playing[i], document.getElementById('p' + playing[i].name).value])
+      if (document.getElementById('a' + playing[i].name).value != playing[i].song) computers.push(playing[i].name)
    }
    if (!computers.length) return
    log_update("Send songs update to server: " + JSON.stringify(computers))
-   // send data to server
+   var nodes = silent.concat(playing)
+   var send = []
+   for (var node of nodes) {
+      if (computers.indexOf(node.name) == -1) continue
+      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+time_delay).toString(), audio_url: document.getElementById('a' + node.name).value}
+      send.push(object)
+   }
+   send_data(send)
 }
 
 function updateData(newData) { // for when the server sends shit
