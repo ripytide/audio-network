@@ -1,6 +1,6 @@
 let audio_url = "random starting url"
-let play_at;
-let volume;
+let play_at = 0;
+let volume = 0;
 let audio = new Audio("");
 let playing = false;
 let audio_changed = false;
