@@ -5,4 +5,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
 	//insert new node into database
 	Query("INSERT INTO timesync (name) values(?)", "s", $_POST["name"]);
+}
 ?>
