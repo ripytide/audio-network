@@ -16,7 +16,7 @@ function Start(){
 	name = prompt("Please enter node name:");
 	$("#name").text("Node name: " + name);
 
-	$("#status").text("Started");
+	$("#status").text("Status: started!");
 	$("#start_button").remove();
 
 	setInterval(Poll, poll_interval);
