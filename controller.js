@@ -4,7 +4,7 @@ var playing = [] //[{name: "as", pingTime: "1620834542", playSince: "1620834542"
 var countdowns = []
 setInterval(function() {
    if (!countdowns.length) return
-   for (var i=0; i < playing.length; i++) {
+   for (var i=0; i < silent.length+playing.length; i++) {
       if (countdowns[i][1] < Date.now()) continue // can't be arsed removing it from the array
       if (!document.getElementById('cd' + countdowns[i][0])) continue
       document.getElementById('cd' + countdowns[i][0]).innerHTML = Math.floor((countdowns[i][1]-Date.now())/1000)
