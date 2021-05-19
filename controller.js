@@ -1,6 +1,15 @@
 var silent = [] //[{name: "1620943094", pingTime: "1620834542", volume: 1, song: "/audio/axel.ogg", playSince: null}, {name: "test3", pingTime: "1620834542", volume: 0.8, song: "/audio/axel.ogg", playSince: null}]
 var playing = [] //[{name: "as", pingTime: "1620834542", playSince: "1620834542", song: "/audio/axel.ogg", volume: 0.4}]
 //var time_delay = 2
+var countdowns = []
+setInterval(function() {
+   if (!countdowns.length) return
+   for (var i=0; i < playing.length; i++) {
+      if (countdowns[i][1] < Date.now()) continue // can't be arsed removing it from the array
+      if (!document.getElementById('cd' + node[0])) continue
+      document.getElementById('cd' + node[0]).innerHTML = Math.floor((countdowns[i][1]-Date.now())/1000)
+   }
+}, 0)
 
 function Get_time(){//returns the current time in unix time
 	let time;
@@ -29,8 +38,8 @@ function updateTables() {
       return 0;
    })
    for (var i=0; i < data.length; i++) {
-      if (data[i].playSince>0) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><td><input id='v" + data[i].name + "' value='" + data[i].volume*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td>" + formatTime(data[i].playSince) + "</td></tr>"
-      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + data[i].volume*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td></tr>"
+      if (data[i].playSince>0) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><td><input id='v" + data[i].name + "' value='" + data[i].volume*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td>" + formatTime(data[i].playSince) + "</td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
+      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + data[i].volume*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><span id ='cd" + data[i].name + "'></span></td></tr>"
    }
 }
 
@@ -64,6 +73,7 @@ function start_playing() {
       if (computers.indexOf(node.name) == -1) continue
       var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
+      countdowns.push([node.name, Number(document.getElementById('time_delay').value)*1000+Number(Date.now())])
    }
    console.log(send)
    send_data(send)
