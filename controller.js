@@ -6,7 +6,7 @@ setInterval(function() {
    if (!countdowns.length) return
    for (var i=0; i < silent.length+playing.length; i++) {
       if (countdowns[i][1] < Date.now()) {
-         document.getElementById('cd' + countdowns[i][0]).innerHTML == '0'
+         document.getElementById('cd' + countdowns[i][0]).innerHTML == ''
          countdowns.splice(i, 1)
          continue
       }
