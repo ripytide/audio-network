@@ -1,3 +1,4 @@
+//audio global variables
 let audio_url = ""
 let play_at = 0;
 let volume = 0;
@@ -5,18 +6,16 @@ let audio = new Audio("");
 let playing = false;
 let audio_changed = false;
 
+//tweakables
 let interval = 5000; //time between time checks
 let poll_interval = 5000; //time between polls
 
-setInterval(Poll, poll_interval);
 
 function Start(){
-	let status = document.getElementById("status");
-	let start_button = document.getElementById("start_button");
+	$("#started").text("Started");
+	$("#start_button").remove();
 
-	status.innerHTML = "Started"
-	start_button.remove();
-
+	setInterval(Poll, poll_interval);
 	setInterval(Check_play, interval);
 }
 
@@ -33,12 +32,12 @@ function Check_play(){
 	if (play_at < 0) { //play_at will be negative as a signal to pause
 		audio.pause();
 		playing = false;
-		document.getElementById("playing").innerHTML = "Not Playing...";
+		$("#playing").text("Not Playing...");
 		
 	} else if (Get_time() > play_at) { //time to play
 		audio.play();
 		playing = true;
-		document.getElementById("playing").innerHTML = "Playing";
+		$("#playing").text("Playing");
 	}
 }
 
