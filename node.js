@@ -50,7 +50,7 @@ function Poll(){
 		url: "HandleNodePoll.php",
 		success: Poll_returned,
 		type: "POST",
-		data: {playing},
+		data: {name, playing},
 		dataType: "json",
 	});
 }
