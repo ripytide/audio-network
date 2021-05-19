@@ -1,9 +1,3 @@
-<?php
-session_start();
-$name = $_SESSION["name"];
-session_commit();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,7 +16,7 @@ session_commit();
 	<body>
 		<script src="node.js"></script>
 	
-		<h1><?php echo($name); ?></h1>
+		<h1 id="name"></h1>
 
 		<button id="start_button" onclick="Start()">Start</button>
 		<h1 id="status">Not started...</h1>
@@ -31,11 +25,5 @@ session_commit();
 		<h1 id="audio_url"></h1>
 		<h1 id="play_at"></h1>
 		<h1 id="volume"></h1>
-
-		<form action="HandleRegister.php" method="POST">
-			<label for="name">Name:</label>
-			<input name="name" type="text"></input>
-			<button type="submit">submit</button>
-		</form>
 	</body>
 </html>

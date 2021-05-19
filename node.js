@@ -14,6 +14,7 @@ let poll_interval = 5000; //time between polls
 
 function Start(){
 	name = prompt("Please enter node name:");
+	$("#name").text("Node name: " + name);
 
 	$("#status").text("Started");
 	$("#start_button").remove();
@@ -61,7 +62,7 @@ function Poll(){
 function Poll_returned(json){
 	//update variables from poll
 	audio_url = json["audio_url"];
-	$("#audio_url").text("Audio url: " + audio_url);
+	$("#audio_url").text("Audio URL: " + audio_url);
 
 	play_at = json["play_at"];
 	$("#play_at").text("Play At: " + play_at);
