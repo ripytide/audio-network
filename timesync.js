@@ -210,7 +210,7 @@ function Update_delay_mode(mode){
 }
 
 function Get_time(){
-	return (Date.now() - time_offset) / 1000;
+	return (Date.now() + time_offset) / 1000;
 }
 
 let name;
