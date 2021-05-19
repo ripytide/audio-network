@@ -41,7 +41,7 @@ function volume_update(computer) {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      if (node.name == computer) var object = {play_at: computer.play_at.toString(), audio_url: computer.song, name: node.name, audio_changed: false}
+      if (node.name == computer) var object = {play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: false}
       else continue
       send.push(object)
    }
