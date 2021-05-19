@@ -30,7 +30,6 @@ function Check_play(){
 	if (audio_changed) { //if the audio_url has changed then make a new audio object
 		audio = new Audio(audio_url)
 		audio.onended = function(){playing=false};
-		current_audio = audio_url;
 		changed = false;
 	}
 	
