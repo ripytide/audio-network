@@ -14,6 +14,7 @@ let poll_interval = 5000; //time between polls
 
 function Start(){
 	name = prompt("Please enter node name:");
+	Register();
 	$("#name").text("Node name: " + name);
 
 	$("#status").text("Status: started!");
@@ -71,4 +72,12 @@ function Poll_returned(json){
 	$("#volume").text("Volume: " + volume);
 
 	audio_changed = json["audio_changed"];
+}
+
+function Register(){
+	$.ajax({
+		url: "HandleNodeRegister.php",
+		type: "POST",
+		data: {name},
+	});
 }
