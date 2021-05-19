@@ -5,6 +5,7 @@ let volume = 0;
 let audio = new Audio("");
 let playing = false;
 let audio_changed = false;
+let name;
 
 //tweakables
 let interval = 5000; //time between time checks
@@ -12,6 +13,8 @@ let poll_interval = 5000; //time between polls
 
 
 function Start(){
+	name = prompt("Please enter node name:");
+
 	$("#status").text("Started");
 	$("#start_button").remove();
 
