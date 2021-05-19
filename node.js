@@ -12,7 +12,7 @@ let poll_interval = 5000; //time between polls
 
 
 function Start(){
-	$("#started").text("Started");
+	$("#status").text("Started");
 	$("#start_button").remove();
 
 	setInterval(Poll, poll_interval);
