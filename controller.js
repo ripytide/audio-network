@@ -143,7 +143,7 @@ Poll()
 
 setInterval(function() {
    Poll()
-}, 500)
+}, 5000)
 
 function Poll_returned(nodes) {
    console.log(performance.now())
