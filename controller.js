@@ -6,8 +6,8 @@ setInterval(function() {
    if (!countdowns.length) return
    for (var i=0; i < playing.length; i++) {
       if (countdowns[i][1] < Date.now()) continue // can't be arsed removing it from the array
-      if (!document.getElementById('cd' + node[0])) continue
-      document.getElementById('cd' + node[0]).innerHTML = Math.floor((countdowns[i][1]-Date.now())/1000)
+      if (!document.getElementById('cd' + countdowns[i][0])) continue
+      document.getElementById('cd' + countdowns[i][0]).innerHTML = Math.floor((countdowns[i][1]-Date.now())/1000)
    }
 }, 0)
 
