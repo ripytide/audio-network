@@ -5,5 +5,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
   
 	Query("UPDATE nodes SET audio_url=?,play_at=?,volume=?,audio_changed=? WHERE name=?", "sssss", $_POST["audio_url"], $_POST["play_at"], $_POST["volume"], $_POST["audio_changed"], $_POST["name"]);
 }
-	echo(Query("SELECT * FROM ?", "s", "nodes")->fetch_assoc());
+	echo(Query("SELECT * FROM nodes WHERE name != ?", "s", "nodisatisaothns")->fetch_assoc());
 ?>
