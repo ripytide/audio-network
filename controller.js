@@ -41,7 +41,7 @@ function volume_update(computer) {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      if (node.name == computer) var object = {play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: false, volume: volume}
+      if (node.name == computer) var object = {play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: 0, volume: volume}
       else continue
       send.push(object)
    }
@@ -62,7 +62,7 @@ function start_playing() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    console.log(send)
@@ -80,7 +80,7 @@ function stop_playing() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: '-1', audio_url: document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
@@ -97,7 +97,7 @@ function update_songs() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: true, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
