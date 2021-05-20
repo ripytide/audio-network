@@ -42,8 +42,8 @@ function updateTables() {
       return 0;
    })
    for (var i=0; i < data.length; i++) {
-      if (data[i].playSince>0) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><td><input id='v" + data[i].name + "' value='" + data[i].volume*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td>" + formatTime(data[i].playSince) + "</td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
-      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + data[i].volume*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><span id ='cd" + data[i].name + "'></span></td></tr>"
+      if (data[i].playSince>0) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td></td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><td><input id='v" + data[i].name + "' value='" + sqrt(data[i].volume)*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td>" + formatTime(data[i].playSince) + "</td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
+      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td></td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + sqrt(data[i].volume)*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><span id ='cd" + data[i].name + "'></span></td></tr>"
    }
 }
 
@@ -54,7 +54,7 @@ function volume_update(computer) {
    var nodes = silent.concat(playing)
    var send = []
    for (var node of nodes) {
-      if (node.name == computer) var object = {play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: 0, volume: volume}
+      if (node.name == computer) var object = {play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: 0, volume: volume**2}
       else continue
       send.push(object)
    }
