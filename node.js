@@ -54,11 +54,12 @@ function Get_time(){
 }
 
 function Poll(){
+	let binary_playing = playing ? 1 : 0;
 	$.ajax({
 		url: "HandleNodePoll.php",
 		success: Poll_returned,
 		type: "POST",
-		data: {name, playing},
+		data: {name, playing: binary_playing},
 		dataType: "json",
 	});
 }
