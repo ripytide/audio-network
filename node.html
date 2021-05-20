@@ -18,18 +18,26 @@
 	</head>
 	<body>
 		<script src="node.js"></script>
+		<style>
+			body {
+				background-color: "red";
+			}
+		</style>
 	
 		<h1 id="name"></h1>
 
 		<button id="start_button" onclick="Start()">Start</button>
 		<button id="find_offset" onclick="set_offset()">Find Offset</button>
 		
-		<h1 id="status">Not started...</h1>
-		<h1 id="ping_status"></h1>
-		<h1 id="offset">Offset: 0</h1>
-		<h1 id="playing"></h1>
-		<h1 id="audio_url"></h1>
-		<h1 id="play_at"></h1>
-		<h1 id="volume"></h1>
+		<h1>Setup Info</h1>
+		<h2 id="status">Not started...</h2>
+		<h2 id="ping_status"></h2>
+		<h2 id="offset">Offset: 0</h2>
+		
+		<h1>Song Info:</h1>
+		<h2 id="playing"></h2>
+		<h2 id="audio_url"></h2>
+		<h2 id="play_at"></h2>
+		<h2 id="volume"></h2>
 	</body>
 </html>
