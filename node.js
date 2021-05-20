@@ -98,7 +98,7 @@ function set_offset(){
 	const num = 500
 	$("#find_offset").remove();
 	for (let ping_count = 1; ping_count <= num; ping_count++){
-		ping_times.push(get_time_diff("GetTime.php");
+		ping_times.push(get_time_diff("GetTime.php"));
 		$("#ping_status").text("Mode finding in progress: " + ping_count + "/" ping_total);
 		$("#offset").text("Offset: " + ss.mode(ping_times));
 	}
