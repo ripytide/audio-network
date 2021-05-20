@@ -93,8 +93,9 @@ function Register(){
 }
 
 let offset = 0;
-function set_offset(num){
+function set_offset(){
 	let ping_times = []
+	const num = 500
 	$("#find_offset").remove();
 	for (let ping_count = 1; ping_count <= num; ping_count++){
 		ping_times.push(get_time_diff("GetTime.php");
