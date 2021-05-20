@@ -29,7 +29,7 @@ function Start(){
 function Check_play(){
 	if (audio_changed) { //if the audio_url has changed then make a new audio object
 		audio = new Audio(audio_url)
-		audio.onended = function(){playing=false;$("#playing").text("Not Playing...")};
+		audio.onended = Pause;
 		changed = false;
 		allow_play = true;
 	}
@@ -37,20 +37,26 @@ function Check_play(){
 	audio.volume = volume;
 	
 	if (play_at < 0) { //play_at will be negative as a signal to pause
-		audio.pause();
-		playing = false;
-		$("#playing").text("Not Playing...");
+
 		
 	} else if (Get_time() > play_at && allow_play) { //time to play and allow_play used to stop looping
-		audio.play();
-		playing = true;
-		allow_play = false;
-		$("#playing").text("Playing");
+		Play();
 	}
 }
 
-function Get_time(){
-	return Date.now();
+function Play(){
+	audio.play();
+	playing = true;
+	allow_play = false;
+	$("#playing").text("Playing");
+	document.getElementsByTagName("BODY")[0].style.background = "green";
+}
+
+function Pause(){
+	audio.pause();
+	playing = false;
+	$("#playing").text("Not Playing...");
+	document.getElementsByTagName("BODY")[0].style.background = "red";
 }
 
 function Poll(){
@@ -84,4 +90,35 @@ function Register(){
 		type: "POST",
 		data: {name},
 	});
+}
+
+let offset = 0;
+function set_offset(num){
+	let ping_times = []
+	$("#find_offset").remove();
+	for (let ping_count = 1; ping_count <= num; ping_count++){
+		ping_times.push(get_time_diff("GetTime.php");
+		$("#ping_status").text("Mode finding in progress: " + ping_count + "/" ping_total);
+		$("#offset").text("Offset: " + ss.mode(ping_times));
+	}
+	offset = ss.mode(ping_times);
+}
+
+function get_time_diff(url){ //get the time difference in ms between current time and the time from a time api
+	time_before = Date.now()
+	let requested_time;
+	$.ajax({
+		url,
+		dataType: "text",
+		async: false,
+		success: (time) => {
+			requested_time = time
+		},
+		type: "POST"
+	});
+	return parseInt(requested_time) - time_before
+}
+
+function Get_time(){
+	return (Date.now() + offset) / 1000;
 }
