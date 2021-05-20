@@ -36,7 +36,7 @@ function Get_time(){//returns the current time in unix time
 
 function updateTables() {
    // ran whenever computers are changed/added/whatever
-   document.getElementById("nodes").innerHTML = ""
+   document.getElementById("nodes").innerHTML = "<tr><td><b>Node name</b></td><td><b>Playing</b></td><td><b></b></td><td><b>Song URL</b></td><td><b>Volume</b></td><td><b>Countdown</b></td></tr>"
    var data = silent.concat(playing)
    data.sort((a,b) => {
       let fa = a.name.toLowerCase(),
