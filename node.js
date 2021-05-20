@@ -92,14 +92,17 @@ function Register(node_name){
 }
 
 let offset = 0;
-function set_offset(){
-	let ping_times = []
+let ping_times = []
+async function set_offset(){
+	ping_times = []
 	const num = 500
 	$("#find_offset").remove();
 	for (let ping_count = 1; ping_count <= num; ping_count++){
 		ping_times.push(get_time_diff("GetTime.php"));
 		$("#ping_status").text("Mode finding in progress: " + ping_count + "/" + num);
 		$("#offset").text("Offset: " + ss.mode(ping_times));
+		
+		await new Promise(r => setTimeout(r, 1));
 	}
 	offset = ss.mode(ping_times);
 }
