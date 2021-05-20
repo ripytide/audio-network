@@ -15,6 +15,14 @@ setInterval(function() {
    }
 }, 0)
 
+function mass_song_change(audio) {
+   nodes = silent.concat(playing)
+   for (var node of nodes) {
+      document.getElementById('a' + node.name).value = audio
+   }
+   update_songs()
+}
+
 function Get_time(){//returns the current time in unix time
 	let time;
 	$.ajax({
