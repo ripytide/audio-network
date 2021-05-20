@@ -67,7 +67,7 @@ function Poll(){
 		url: "HandleNodePoll.php",
 		success: Poll_returned,
 		type: "POST",
-		data: {node_name, playing: binary_playing},
+		data: {name: node_name, playing: binary_playing},
 		dataType: "json",
 	});
 }
