@@ -7,6 +7,9 @@
 		
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- simplestatistics library -->
+		<script src="https://unpkg.com/simple-statistics@7.7.0/dist/simple-statistics.min.js"></script>
 
 		<!-- Hand made style sheet -->
 		<link href="styles.css" rel="stylesheet" />
@@ -19,8 +22,11 @@
 		<h1 id="name"></h1>
 
 		<button id="start_button" onclick="Start()">Start</button>
+		<button id="find_offset" onclick="set_offset()">Find Offset</button>
+		
 		<h1 id="status">Not started...</h1>
-
+		<h1 id="ping_status"></h1>
+		<h1 id="offset">Offset: 0</h1>
 		<h1 id="playing"></h1>
 		<h1 id="audio_url"></h1>
 		<h1 id="play_at"></h1>
