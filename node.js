@@ -39,9 +39,6 @@ function Check_play(){
 	
 	if (play_at < 0) { //play_at will be negative as a signal to pause
 		Pause();
-	}
-
-		
 	} else if (Get_time() > play_at && allow_play) { //time to play and allow_play used to stop looping
 		Play();
 	}
