@@ -6,7 +6,6 @@ let audio = new Audio("");
 let playing = false;
 let audio_changed = false;
 let allow_play = false;
-let name;
 
 
 //tweakables
@@ -15,9 +14,9 @@ let poll_interval = 5000; //time between polls
 
 
 function Start(){
-	name = prompt("Please enter node name:");
-	Register();
-	$("#name").text("Node name: " + name);
+	node_name = prompt("Please enter node name:");
+	Register(node_name);
+	$("#name").text("Node name: " + node_name);
 
 	$("#status").text("Status: started!");
 	$("#start_button").remove();
@@ -84,11 +83,11 @@ function Poll_returned(json){
 	audio_changed = json["audio_changed"];
 }
 
-function Register(){
+function Register(node_name){
 	$.ajax({
 		url: "HandleNodeRegister.php",
 		type: "POST",
-		data: {name},
+		data: {name: node_name},
 	});
 }
 
