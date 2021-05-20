@@ -5,7 +5,9 @@ let volume = 0;
 let audio = new Audio("");
 let playing = false;
 let audio_changed = false;
+let allow_play = false;
 let name;
+
 
 //tweakables
 let interval = 5000; //time between time checks
@@ -25,22 +27,24 @@ function Start(){
 }
 
 function Check_play(){
-	audio.volume = volume;
-
 	if (audio_changed) { //if the audio_url has changed then make a new audio object
 		audio = new Audio(audio_url)
-		audio.onended = function(){playing=false};
+		audio.onended = function(){playing=false;$("#playing").text("Not Playing...")};
 		changed = false;
+		allow_play = true;
 	}
+	
+	audio.volume = volume;
 	
 	if (play_at < 0) { //play_at will be negative as a signal to pause
 		audio.pause();
 		playing = false;
 		$("#playing").text("Not Playing...");
 		
-	} else if (Get_time() > play_at) { //time to play
+	} else if (Get_time() > play_at && allow_play) { //time to play and allow_play used to stop looping
 		audio.play();
 		playing = true;
+		allow_play = false;
 		$("#playing").text("Playing");
 	}
 }
