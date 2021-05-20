@@ -23,6 +23,8 @@ function Start(){
 
 	setInterval(Poll, poll_interval);
 	setInterval(Check_play, interval);
+	
+	document.getElementsByTagName("BODY")[0].style.background = "red";
 }
 
 function Check_play(){
@@ -36,6 +38,8 @@ function Check_play(){
 	audio.volume = volume;
 	
 	if (play_at < 0) { //play_at will be negative as a signal to pause
+		Pause();
+	}
 
 		
 	} else if (Get_time() > play_at && allow_play) { //time to play and allow_play used to stop looping
