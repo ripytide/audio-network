@@ -7,6 +7,8 @@ let playing = false;
 let audio_changed = false;
 let allow_play = false;
 
+let node_name;
+
 
 //tweakables
 let interval = 5000; //time between time checks
@@ -65,7 +67,7 @@ function Poll(){
 		url: "HandleNodePoll.php",
 		success: Poll_returned,
 		type: "POST",
-		data: {name, playing: binary_playing},
+		data: {node_name, playing: binary_playing},
 		dataType: "json",
 	});
 }
@@ -84,7 +86,7 @@ function Poll_returned(json){
 	audio_changed = json["audio_changed"];
 }
 
-function Register(node_name){
+function Register(){
 	$.ajax({
 		url: "HandleNodeRegister.php",
 		type: "POST",
