@@ -57,6 +57,7 @@ function Play(){
 function Pause(){
 	audio.pause();
 	playing = false;
+	allow_play = false;
 	$("#playing").text("Not Playing...");
 	document.getElementsByTagName("BODY")[0].style.background = "red";
 }
