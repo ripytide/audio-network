@@ -23,6 +23,33 @@ function mass_song_change(audio) {
    update_songs()
 }
 
+function start_all() {
+   var send = []
+   for (var node of silent) {
+      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value})
+      countdowns.push([node.name, Number(document.getElementById('time_delay').value)*1000+Number(Date.now())])
+   }
+   send_data(send)
+}
+
+function stop_all() {
+   var send = []
+   for (var node of playing) {
+      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url: document.getElementById('a' + node.name).value})
+   }
+   send_data(send)
+}
+
+function mass_volume_change(volume) {
+   volume = Number(volume)
+   nodes = silent.concat(playing)
+   var send = []
+   for (var node of nodes) {
+      send.push({play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: 0, volume: volume})
+   }
+   send_data(send)
+}
+
 function Get_time(){//returns the current time in unix time
 	let time;
 	$.ajax({
