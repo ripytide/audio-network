@@ -26,7 +26,7 @@ function mass_song_change(audio) {
 function start_all() {
    var send = []
    for (var node of silent) {
-      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" + document.getElementById('a' + node.name).value})
+      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/" + document.getElementById('a' + node.name).value})
       countdowns.push([node.name, Number(document.getElementById('time_delay').value)*1000+Number(Date.now())])
    }
    send_data(send)
@@ -35,7 +35,7 @@ function start_all() {
 function stop_all() {
    var send = []
    for (var node of playing) {
-      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url:  "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" +  document.getElementById('a' + node.name).value})
+      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url:  "https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/" +  document.getElementById('a' + node.name).value})
    }
    send_data(send)
 }
@@ -79,8 +79,8 @@ function updateTables() {
    })
    for (var i=0; i < data.length; i++) {
       if (!data[i].song) data[i].song = ""
-      if (data[i].playing) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song.replace("https://cdn.githubraw.com/ripytide/audio-network/main/audio/","") + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + Math.sqrt(data[i].volume)*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
-      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song.replace("https://cdn.githubraw.com/ripytide/audio-network/main/audio/","") + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + Math.sqrt(data[i].volume)*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
+      if (data[i].playing) document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>Yes</td><td><input type='checkbox' id='p" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song.replace("https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/","") + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + Math.sqrt(data[i].volume)*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
+      else document.getElementById("nodes").innerHTML += "<tr><td>" + data[i].name + "</td><td>No</td><td><input type='checkbox' id='s" + data[i].name + "'></input></td><td><input type='text' value='" + data[i].song.replace("https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/","") + "' id='a" + data[i].name + "'></input></td><td><input id='v" + data[i].name + "' value='" + Math.sqrt(data[i].volume)*100 + "' onclick=\"volume_update('v" + data[i].name + "')\" type='range' min='0' max='100'></td><td><span id ='cd" + data[i].name + "'></span></td></tr>"
    }
 }
 
@@ -112,7 +112,7 @@ function start_playing() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" + document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/" + document.getElementById('a' + node.name).value}
       send.push(object)
       countdowns.push([node.name, Number(document.getElementById('time_delay').value)*1000+Number(Date.now())])
    }
@@ -131,7 +131,7 @@ function stop_playing() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url: "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" + document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url: "https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/" + document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
@@ -140,7 +140,7 @@ function stop_playing() {
 function update_songs() {
    var computers = []
    for (var i=0; i < playing.length; i++) {
-      if ("https://cdn.githubraw.com/ripytide/audio-network/main/audio/" + document.getElementById('a' + playing[i].name).value != playing[i].song) computers.push(playing[i].name)
+      if ("https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/" + document.getElementById('a' + playing[i].name).value != playing[i].song) computers.push(playing[i].name)
    }
    if (!computers.length) return
    log_update("Send songs update to server: " + JSON.stringify(computers))
@@ -148,7 +148,7 @@ function update_songs() {
    var send = []
    for (var node of nodes) {
       if (computers.indexOf(node.name) == -1) continue
-      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" + document.getElementById('a' + node.name).value}
+      var object = {volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://rawcdn.githack.com/ripytide/audio-network/3a832da56f8281b1483eadde9fef55b26444dbb5/audio/" + document.getElementById('a' + node.name).value}
       send.push(object)
    }
    send_data(send)
