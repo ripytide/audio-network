@@ -26,7 +26,7 @@ function mass_song_change(audio) {
 function start_all() {
    var send = []
    for (var node of silent) {
-      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: document.getElementById('a' + node.name).value})
+      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: (Number(Get_time())+Number(document.getElementById('time_delay').value)).toString(), audio_url: "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" + document.getElementById('a' + node.name).value})
       countdowns.push([node.name, Number(document.getElementById('time_delay').value)*1000+Number(Date.now())])
    }
    send_data(send)
@@ -35,7 +35,7 @@ function start_all() {
 function stop_all() {
    var send = []
    for (var node of playing) {
-      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url: document.getElementById('a' + node.name).value})
+      send.push({volume: node.volume, name: node.name, audio_changed: 1, play_at: '-1', audio_url:  "https://cdn.githubraw.com/ripytide/audio-network/main/audio/" +  document.getElementById('a' + node.name).value})
    }
    send_data(send)
 }
