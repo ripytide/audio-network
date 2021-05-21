@@ -46,7 +46,7 @@ function mass_volume_change(volume) {
    var send = []
    for (var node of nodes) {
       send.push({play_at: node.playSince.toString(), audio_url: node.song, name: node.name, audio_changed: 0, volume: volume})
-      document.getElementById('v' + node.name).value = Math.sqrt(volume)
+      document.getElementById('v' + node.name).value = Math.sqrt(volume)*100
    }
    send_data(send)
 }
