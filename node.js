@@ -13,6 +13,7 @@ let node_name;
 //tweakables
 let interval = 0; //time between time checks
 let poll_interval = 1000; //time between polls
+const num = 100;
 
 
 function Start(){
@@ -102,7 +103,6 @@ let offset = 0;
 let ping_times = []
 async function set_offset(){
 	ping_times = []
-	const num = 500
 	$("#find_offset").remove();
 	for (let ping_count = 1; ping_count <= num; ping_count++){
 		ping_times.push(get_time_diff("GetTime.php"));
