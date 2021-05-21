@@ -40,7 +40,7 @@ function Check_play(){
 	audio.volume = volume;
 	
 	if (play_at < 0) { //play_at will be negative as a signal to pause
-		if (audio.playing) {
+		if (!audio.paused) {
 			Pause();
 		}
 	} else if (Get_time() > play_at && allow_play) { //time to play and allow_play used to stop looping
