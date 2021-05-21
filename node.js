@@ -31,6 +31,7 @@ function Start(){
 
 function Check_play(){
 	if (audio_changed) { //if the audio_url has changed then make a new audio object
+		audio.pause(); //first make sure the previous object is silent
 		audio = new Audio(audio_url)
 		audio.onended = Pause;
 		changed = false;
