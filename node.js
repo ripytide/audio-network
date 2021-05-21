@@ -11,8 +11,8 @@ let node_name;
 
 
 //tweakables
-let interval = 5000; //time between time checks
-let poll_interval = 5000; //time between polls
+let interval = 0; //time between time checks
+let poll_interval = 1000; //time between polls
 
 
 function Start(){
