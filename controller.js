@@ -13,7 +13,7 @@ setInterval(function() {
       if (!document.getElementById('cd' + countdowns[i][0])) continue
       document.getElementById('cd' + countdowns[i][0]).innerHTML = Math.floor((countdowns[i][1]-Date.now())/1000)
    }
-}, 0)
+}, 100)
 
 function mass_song_change(audio) {
    nodes = silent.concat(playing)
@@ -194,7 +194,7 @@ Poll()
 
 setInterval(function() {
    Poll()
-}, 500)
+}, 2000)
 
 function Poll_returned(nodes) {
    console.log(performance.now())
