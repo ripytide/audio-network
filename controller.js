@@ -52,14 +52,7 @@ function mass_volume_change(volume) {
 }
 
 function Get_time(){//returns the current time in unix time
-	let time;
-	$.ajax({
-		url: "https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp?datetime=now",
-		success: function(json){time=json["UnixTimeStamp"]},
-		async: false
-	});
-
-	return time;
+	return Math.floor(Date.now()/1000)
 }		
 
 function updateTables() {
