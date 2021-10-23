@@ -9,4 +9,4 @@ There two important pages: `node.html` and `controller.html`. `node.html` is the
 The application would have been way simpler using websockets but oh well. The controller page tell the backend when it wants music to play. Nodes tell the server that they are online so the controller can see them. Nodes also also find the delay of their system times to the server's system time using a kind of NTP protocol. The nodes then poll the server regularly to see if there is a song to be played and at what time. Then at the right time they all play the same audio at the same time. Much funny.
 
 # Tech stack
-raw js frontend, raw php backend
+raw js frontend, raw php backend w/ sql
